@@ -2,131 +2,73 @@
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
 
-# Django
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-media/
-
-# Environments
-.env
-.venv
-env/
+# Virtual Environment
 venv/
 ENV/
-env.bak/
-venv.bak/
+env/
+.env
 
-# VS Code
+# Database
+db.sqlite3
+
+# IDE
 .vscode/
-*.code-workspace
-.history/
-
-# PyCharm
 .idea/
-*.iml
-*.iws
-.idea_modules/
+*.swp
+*.swo
 
-# ML Models and Data
+# ML Model files - only ignore generated models, keep the code
 *.pkl
 *.h5
 *.model
 *.joblib
+
+# Datasets - ignore data files but keep structure
 datasets/raw/*
 datasets/processed/*
-ml_model/trained_models/*
 !datasets/raw/.gitkeep
 !datasets/processed/.gitkeep
-!ml_model/trained_models/.gitkeep
-
-# Jupyter Notebooks
-.ipynb_checkpoints
-*/.ipynb_checkpoints/*
-notebooks/.ipynb_checkpoints/
-*.ipynb_checkpoints
-
-# MongoDB
-*.mongodb
-mongod.log*
 
 # Logs
-logs/
 *.log
+logs/
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# Coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-cover/
-
-# Swagger
-swagger.json
-swagger.yaml
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
 
 # Mac OS
 .DS_Store
-.AppleDouble
-.LSOverride
 
 # Windows
 Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
-*.stackdump
 [Dd]esktop.ini
 
-# Documentation
-docs/_build/
-docs/generated/
-
-# temp files
-*.swp
-*.swo
-*~
-
-# virtual environment
-.python-version
-
-# Local development settings
+# Local development
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.development
+.env.production
 
-# Keep these files
-!.gitkeep
+# Django
+*.pyc
+*.pyo
+*.mo
+*.db
+*.css.map
+*.egg*
+*.egg-info
+*.egg/
+media
+staticfiles
+
+# Keep important files
 !requirements.txt
 !README.md
+!.gitkeep
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
