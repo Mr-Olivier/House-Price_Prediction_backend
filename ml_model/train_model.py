@@ -3,11 +3,18 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
 import joblib
+import os
+
+# Ensure directories exist
+os.makedirs('ml_model/scalers', exist_ok=True)
 
 # Load dataset
 data = pd.read_csv('datasets/raw/house_prices.csv')
-X = data[['area', 'bedrooms', 'bathrooms']]
-y = data['price']
+
+# Select relevant columns
+X = data[['area', 'bedrooms', 'bathrooms']]  # Use columns from your dataset
+X.columns = ['square_footage', 'bedrooms', 'bathrooms']  # Rename for consistency
+y = data['price']  # Target variable
 
 # Preprocessing
 scaler = StandardScaler()
