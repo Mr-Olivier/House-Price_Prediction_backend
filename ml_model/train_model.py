@@ -6,7 +6,7 @@ import joblib
 
 # Load dataset
 data = pd.read_csv('datasets/raw/house_prices.csv')
-X = data[['square_footage', 'bedrooms', 'bathrooms']]
+X = data[['area', 'bedrooms', 'bathrooms']]
 y = data['price']
 
 # Preprocessing
@@ -23,3 +23,5 @@ model.fit(X_train, y_train)
 # Save model and scaler
 joblib.dump(model, 'ml_model/price_model.pkl')
 joblib.dump(scaler, 'ml_model/scalers/standard_scaler.pkl')
+
+print("Model and scaler saved successfully!")
