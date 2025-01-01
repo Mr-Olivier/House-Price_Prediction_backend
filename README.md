@@ -1,167 +1,143 @@
-# 🏠 House Price Prediction Project
+🏠 House Price Prediction System Backend
 
-<div align="center">
+📋 Project Overview
+The House Price Prediction System Backend is a Django-powered application that provides machine learning-based predictions for house prices. It includes:
 
-![Python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
-![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
-</div>
-
-## 📑 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [API Documentation](#api-documentation)
-- [ML Model](#ml-model)
-- [Contributing](#contributing)
-- [License](#license)
-
-## 🎯 Overview
-
-A comprehensive house price prediction system that combines machine learning with a modern web interface. The system uses historical housing data to predict property prices based on various features like square footage, number of bedrooms, location, etc.
-
-## ✨ Features
-
-### Backend Features
-
-- 🤖 Machine Learning model for accurate price predictions
-- 🔄 REST API with Swagger documentation
-- 📊 Data preprocessing and analysis pipeline
-- 🗄️ MongoDB integration for data storage
-- ✅ Comprehensive testing suite
-
-### Frontend Features
-
-- 📱 Responsive design for all devices
-- 📊 Interactive data visualizations
-- 🔍 Real-time price predictions
-- 📈 Historical prediction tracking
-- 🌙 Dark mode support
-
-## 🛠️ Tech Stack
-
-### Backend
-
-- **Framework:** Django 4.2
-- **Database:** MongoDB
-- **ML Libraries:**
-- Scikit-learn
-- Pandas
-- NumPy
-- **API Documentation:** Swagger/OpenAPI
-- **Testing:** PyTest
-
-### Frontend
-
-- **Framework:** React + Vite
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **State Management:** Redux Toolkit
-- **Charts:** Recharts
-
-## 📁 Project Structure
-
-```bash
-price_prediction_project/
+RESTful APIs for predictions and retrieving prediction history.
+A trained Linear Regression model to predict house prices based on features like area, bedrooms, and bathrooms.
+Persistent storage for tracking prediction history.
+🌟 Features
+🔮 Prediction Endpoint: Accepts house details (area, bedrooms, bathrooms) and returns the predicted price.
+🧠 Machine Learning Integration: Uses a pre-trained Linear Regression model.
+📊 History Endpoint: Retrieves all past predictions from the database.
+📜 Swagger API Documentation: Interactive API docs for seamless integration.
+⚙️ Tech Stack
+Django: Web framework for the backend.
+Django REST Framework (DRF): For building RESTful APIs.
+scikit-learn: For machine learning model training and predictions.
+pandas and NumPy: For data preprocessing.
+SQLite: Default database for development.
+📁 Backend Structure
+bash
+Copy code
+backend/
+├── price_prediction/ # Main project configuration
+│ ├── settings.py # Project settings
+│ ├── urls.py # Root URL configuration
+│ ├── wsgi.py # WSGI application
 │
-├── backend/
-│   ├── price_prediction/      # Django project
-│   ├── predictor/            # Main app
-│   ├── ml_model/            # ML components
-│   ├── datasets/            # Data files
-│   ├── docs/                # Documentation
-│   └── tests/               # Test suite
+├── predictor/ # Predictor app
+│ ├── migrations/ # Database migrations
+│ ├── models.py # Database models
+│ ├── serializers.py # Data serialization for APIs
+│ ├── views.py # API logic
+│ ├── urls.py # App-specific URL configuration
 │
-└── frontend/                # React application
-🚀 Getting Started
+├── ml_model/ # Machine learning module
+│ ├── train_model.py # Script to train the ML model
+│ ├── model_utils.py # Utilities for loading and using the ML model
+│ ├── price_model.pkl # Trained ML model
+│ ├── scalers/ # Directory for scalers
+│ ├── standard_scaler.pkl
+│
+├── datasets/ # Dataset-related files
+│ ├── raw/ # Raw dataset files
+│ ├── house_prices.csv
+│
+├── manage.py # Django management script
+└── requirements.txt # Python dependencies
+🚀 How to Set Up and Run
 Prerequisites
+Python 3.10+
+pip (Python package manager)
+Steps
+Clone the Repository
 
-Python 3.8+
-Node.js 16+
-MongoDB
-Git
+bash
+Copy code
+git clone https://github.com/your-repo/house-price-prediction-backend.git
+cd house-price-prediction-backend
+Set Up a Virtual Environment
 
-Backend Setup
-bashCopy# Clone repository
-git clone https://github.com/yourusername/price-prediction.git
-
-# Create virtual environment
+bash
+Copy code
 python -m venv venv
-source venv/bin/activate  # Unix
-.\venv\Scripts\activate  # Windows
+source venv/bin/activate # On Windows: venv\Scripts\activate
+Install Dependencies
 
-# Install dependencies
-cd backend
+bash
+Copy code
 pip install -r requirements.txt
+Prepare the Database
 
-# Set up environment variables
-cp .env.example .env
-
-# Run migrations
+Run migrations to set up the database:
+bash
+Copy code
+python manage.py makemigrations
 python manage.py migrate
+Train the Model
 
-# Start server
+Train the ML model and save it:
+bash
+Copy code
+python ml_model/train_model.py
+Start the Development Server
+
+bash
+Copy code
 python manage.py runserver
-Frontend Setup
-bashCopy# Navigate to frontend
-cd frontend
+Test the APIs
 
-# Install dependencies
-npm install
+Use Postman or cURL to test the /predict/ and /history/ endpoints.
+🔗 API Endpoints
+Prediction Endpoint
+URL: /api/predict/
+Method: POST
+Request Body:
+json
+Copy code
+{
+"area": 2500,
+"bedrooms": 4,
+"bathrooms": 2
+}
+Response:
+json
+Copy code
+{
+"predicted_price": 15000000.0
+}
+Prediction History Endpoint
+URL: /api/history/
+Method: GET
+Response:
+json
+Copy code
+[
+{
+"area": 2500,
+"bedrooms": 4,
+"bathrooms": 2,
+"predicted_price": 15000000.0,
+"created_at": "2025-01-01T12:00:00Z"
+}
+]
+🛠️ Training the Machine Learning Model
+Dataset:
 
-# Start development server
-npm run dev
-📚 API Documentation
-API documentation is available at:
+Ensure the dataset house_prices.csv is placed in datasets/raw/.
+Training Script:
 
-Swagger UI: http://localhost:8000/swagger/
-ReDoc: http://localhost:8000/redoc/
+Run ml_model/train_model.py to train and save the model:
+bash
+Copy code
+python ml_model/train_model.py
+Output Files:
 
-🤖 ML Model
-The prediction model:
-
-Uses Random Forest Regressor
-Features: square footage, bedrooms, bathrooms, location
-Regular retraining with new data
-Evaluation metrics tracked in notebooks
-
-🤝 Contributing
-
-Fork the repository
-Create your feature branch (git checkout -b feature/amazing-feature)
-Commit changes (git commit -m 'Add amazing feature')
-Push to branch (git push origin feature/amazing-feature)
-Open a Pull Request
-
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-📞 Contact
-Your Name - @yourusername
-Project Link: https://github.com/yourusername/price-prediction
-
-<div align="center">
-Made with ❤️ by [Your Name]
-</div>
-```
-
-Would you like me to:
-
-Add more specific sections?
-Include deployment instructions?
-Add troubleshooting guides?
-Include database setup details?
-
-This README includes:
-
-Clear project overview
-Comprehensive setup instructions
-Tech stack details with badges
-Clean structure and organization
-Contributing guidelines
+Trained Model: ml_model/price_model.pkl
+Scaler: ml_model/scalers/standard_scaler.pkl
+📝 Future Enhancements
+🌍 Add Location Feature: Incorporate geospatial data for better predictions.
+🔒 User Authentication: Secure access to prediction history.
+📦 Export Functionality: Allow users to download prediction history.
+📈 Batch Predictions: Enable bulk predictions via file upload.
